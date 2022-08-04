@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
-export default function CadastrarHabitos() {
+export default function CadastrarHabitos({setClicado}) {
 
     const [name, setName] = useState('');
 
@@ -34,7 +34,9 @@ export default function CadastrarHabitos() {
                     <p>S</p>
                 </SemanasComponent>
                 <ButtonGeral>
-                    <ButtonBrancoComponent>Cancelar</ButtonBrancoComponent>
+                    <ButtonBrancoComponent onClick={() => {setClicado(false)}}>
+                        Cancelar
+                    </ButtonBrancoComponent>
                     <ButtonAzulComponent>Salvar</ButtonAzulComponent>
                 </ButtonGeral>
             </form>

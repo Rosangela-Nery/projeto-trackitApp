@@ -8,19 +8,48 @@ export default function Habitos() {
 
     const [clicado, setClicado] = useState(false);
 
+    function paginaInicialDeCriacao() {
+
+        if (!clicado) {
+            return (
+                <>
+                    <TitleEButtonComponent>
+                        <h6>Meus hábitos</h6>
+                        <h5 onClick={() => {
+                        setClicado(true);
+                        }}>+</h5>
+                    </TitleEButtonComponent>
+                    <DescriptionComponent>
+                        Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
+                    </DescriptionComponent>
+                </>
+            );
+        }
+
+        if(clicado) {
+            return (
+                <>
+                    <TitleEButtonComponent>
+                        <h6>Meus hábitos</h6>
+                        <h5 onClick={() => {
+                        setClicado(true);
+                        }}>+</h5>
+                    </TitleEButtonComponent>
+
+                    <CadastrarHabitos setClicado={setClicado}/>
+
+                    <DescriptionComponent>
+                        Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
+                    </DescriptionComponent>
+                </>
+            );
+        }
+    }
+
     return(
         <HabitosComponent>
             <Navbar />
-            <TitleEButtonComponent>
-                <h6>Meus hábitos</h6>
-                <h5 onClick={() => {
-                    setClicado(true);
-                }}>+</h5>
-            </TitleEButtonComponent>
-            {clicado ? (<CadastrarHabitos />) : ("")}
-            <DescriptionComponent>
-                Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
-            </DescriptionComponent>
+                {paginaInicialDeCriacao()}
             <Footer/>
         </HabitosComponent>
     );
