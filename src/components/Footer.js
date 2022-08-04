@@ -30,8 +30,10 @@ const FooterComponent = styled.div`
     align-items: center;
     padding: 0 30px;
 
-    position: absolute;
+    position: fixed;
     bottom: 0;
+    left: 0;
+    z-index: 1;
 
     .circule {
         width: 91px;
