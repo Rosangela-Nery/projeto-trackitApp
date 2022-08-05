@@ -80,7 +80,7 @@ export default function Login() {
 
 const LoginComponents = styled.div`
     width: 414px;
-    height: 962px;
+    height: 667px;
     background-color: white;
     box-sizing: border-box;
 
