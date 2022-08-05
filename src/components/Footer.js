@@ -1,3 +1,4 @@
+import CirculeDeProgresso from './CirculeDeProgresso';
 import styled from 'styled-components';
 
 export default function Footer() {
@@ -6,9 +7,7 @@ export default function Footer() {
             <div>
                 <p>Hábitos</p>
             </div>
-            <div className='circule'>
-                <p>Hoje</p>
-            </div>
+            <CirculeDeProgresso />
             <div>
                 <p>Histórico</p>
             </div>
@@ -34,18 +33,4 @@ const FooterComponent = styled.div`
     bottom: 0;
     left: 0;
     z-index: 1;
-
-    .circule {
-        width: 91px;
-        height: 91px;
-        background-color: #52B6FF;
-        color: white;
-        margin-bottom: 50px;
-        border-radius: 50%;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 18px;
-    }
 `

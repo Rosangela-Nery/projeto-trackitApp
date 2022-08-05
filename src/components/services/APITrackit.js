@@ -43,7 +43,8 @@ function desmarcarHabitoComoFeito() {
 }
 
 function historicoDeHabitosDiario() {
-    const promise = axios.get(`${base_url}/habitos/history/daily`)
+    const promise = axios.get(`${base_url}/habitos/history/daily`);
+    return promise;
 }
 
 export { fazerCadastro, fazerLogin, criarHabitos, listarHabitos, deletarHabitos, buscarHabitosDeHoje, marcarHabitosComoFeito, desmarcarHabitoComoFeito, historicoDeHabitosDiario }

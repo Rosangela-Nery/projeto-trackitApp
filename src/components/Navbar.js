@@ -4,7 +4,7 @@ export default function Navbar() {
     return (
         <NavbarComponent>
             <p>Trackit</p>
-            <img src='../images/foto2.png' width="51px" height="51px"/>
+            <img src='../images/foto2.png' alt='Minha foto' width="51px" height="51px"/>
         </NavbarComponent>
     );
 }
@@ -31,4 +31,4 @@ const NavbarComponent = styled.div`
         font-size: 39px;
         color: white;
     }
-`;
+`
