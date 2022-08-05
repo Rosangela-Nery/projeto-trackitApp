@@ -1,7 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import CadastrarConta from "./CadastrarConta";
 import styled from "styled-components";
 
 export default function Login() {
+    const navigate = useNavigate();
+
+    const [clicado, setClicado] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -12,8 +18,13 @@ export default function Login() {
             password,
         };
 
-        console.log("wer: ", dados)
-        restForm();
+        const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit', dados);
+
+        promise.then((res) => {
+            console.log("wer: ", res.auth);
+            restForm();
+            navigate('/');
+        })
     }
 
     function restForm() {
@@ -21,29 +32,49 @@ export default function Login() {
         setPassword('');
     }
 
+    function cadastre_se() {
+        if(!clicado) {
+            return (
+                <LoginComponents>
+                <img src="../images/logo.svg" alt="Logo" />
+                <form onSubmit={handleForm}>
+                    <label></label>
+                    <input 
+                        id="formEmail" 
+                        placeholder="email"
+                        type="email" 
+                        onChange={(e) => setEmail(e.target.value)}
+                        value={email}
+                        required
+                    />
+                    <input  
+                        id="forSenha" 
+                        placeholder="senha"
+                        type="password"
+                        onChange={(e) => setPassword(e.target.value)}
+                        value={password}
+                        required
+                    />
+                    <button>Entrar</button>
+                </form>
+                <p onClick={() => {
+                    setClicado(true);
+                }}>Não tem uma conta? Cadastre-se!</p>
+            </LoginComponents>
+            );
+        }
+
+        if(clicado){
+            return(
+                <CadastrarConta LoginComponents={LoginComponents} setClicado={setClicado}/>
+            );
+        }
+    }
+
     return (
-        <LoginComponents>
-            <img src="../images/logo.svg" alt="Logo" />
-            <form onSubmit={handleForm}>
-                <label></label>
-                <input 
-                    id="formEmail" 
-                    type="email" 
-                    onChange={(e) => setEmail(e.target.value)}
-                    value={email}
-                    required
-                />
-                <input  
-                    id="forSenha" 
-                    type="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    value={password}
-                    required
-                />
-                <button>Entrar</button>
-            </form>
-            <p>Não tem uma conta? Cadastre-se!</p>
-        </LoginComponents>
+        <>
+            {cadastre_se()}
+        </>
     );
 }
 
@@ -74,6 +105,8 @@ const LoginComponents = styled.div`
         margin-top: 5px;
         border-radius: 5px;
         border: 1px solid #D5D5D5;
+        padding-left: 10px;
+        font-size: 20px;
     }
 
     button {

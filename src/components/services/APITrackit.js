@@ -23,7 +23,7 @@ function listarHabitos() {
 }
 
 function deletarHabitos() {
-    const promise = axios.delete(`${base_url}/habitos/${idHabito}`);
+    const promise = axios.delete(`${base_url}/habitos`);
     return promise;
 }
 
@@ -33,12 +33,12 @@ function buscarHabitosDeHoje() {
 }
 
 function marcarHabitosComoFeito() {
-    const promise = axios.post(`${base_url}/habitos/${idHabito}/check`);
+    const promise = axios.post(`${base_url}/habitos/check`);
     return promise;
 }
 
 function desmarcarHabitoComoFeito() {
-    const promise = axios.post(`${base_url}/habitos/${idHabito}/uncheck`);
+    const promise = axios.post(`${base_url}/habitos/uncheck`);
     return promise;
 }
 

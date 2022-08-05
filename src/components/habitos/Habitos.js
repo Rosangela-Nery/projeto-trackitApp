@@ -31,9 +31,6 @@ export default function Habitos() {
                 <>
                     <TitleEButtonComponent>
                         <h6>Meus hábitos</h6>
-                        <h5 onClick={() => {
-                        setClicado(true);
-                        }}>+</h5>
                     </TitleEButtonComponent>
 
                     <CadastrarHabitos setClicado={setClicado}/>

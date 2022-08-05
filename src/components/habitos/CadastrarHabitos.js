@@ -84,7 +84,6 @@ const InputComponent = styled.input`
     border-radius: 5px;
 
     font-size: 19px;
-    color: #DBDBDB;
     padding-left: 10px;
 `
 
