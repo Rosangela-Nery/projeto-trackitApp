@@ -38,6 +38,7 @@ export default function Habitos({token, fotoDeUsuario}) {
         })
     }, [clicado, remove]);
 
+    console.log('wer: ', tarefas)
     function paginaInicialDeCriacao() {
 
         if (!clicado) {
@@ -80,7 +81,7 @@ export default function Habitos({token, fotoDeUsuario}) {
                     ) :(
                         tarefas.map((item, index) => {
                             return (
-                                <RegisteredHabits item={item} key={index} Registered={Registered} token={token} setRemove={setRemove} weekDays={weekDays} setWeekDays={setWeekDays}/>
+                                <RegisteredHabits item={item} key={index} Registered={Registered} token={token} setRemove={setRemove} weekDays={weekDays} setWeekDays={setWeekDays} weekDaysList={weekDaysList} setWeekDaysList={setWeekDaysList}/>
                             );
                         })
                     )}

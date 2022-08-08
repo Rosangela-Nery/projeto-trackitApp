@@ -2,7 +2,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-export default function RegisteredHabits({Registered, item, index, token, setRemove, weekDays, setWeekDays}) {
+export default function RegisteredHabits({Registered, item, index, token, setRemove, weekDays,weekDaysList}) {
 
     const navigate = useNavigate();
 
@@ -25,6 +25,7 @@ export default function RegisteredHabits({Registered, item, index, token, setRem
             navigate('/')
         }))
     }
+    
 
     return (
         <Registered key={index}>
@@ -33,7 +34,7 @@ export default function RegisteredHabits({Registered, item, index, token, setRem
                 <img src="../images/lixeira.svg" onClick={() => {removeList(item.id)}}/>
             </TitleETrashCan>
             <WeekRegistered>
-                {weekDays.map((item, index) => {
+                {weekDaysList.map((item, index) => {
                     return(
                         <span key={index}>
                             {item.day}
