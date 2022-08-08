@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Week from './Week';
 import { useNavigate } from 'react-router-dom';
 
-export default function CadastrarHabitos({setClicado, token, weekDays, setWeekDays}) {
+export default function CadastrarHabitos({setClicado, token, weekDays, setWeekDays, weekDaysList, setWeekDaysList}) {
     const [name, setName] = useState('');
     const [catchWeek, setCatchWeek] = useState('');
     const navigate = useNavigate();
@@ -48,7 +48,7 @@ export default function CadastrarHabitos({setClicado, token, weekDays, setWeekDa
                 />
 
                 <SemanasComponent>
-                    <Week value={catchWeek} setCatchWeek={setCatchWeek} weekDays={weekDays} setWeekDays={setWeekDays}/>
+                    <Week value={catchWeek} setCatchWeek={setCatchWeek} weekDays={weekDays} setWeekDays={setWeekDays} weekDaysList={weekDaysList} setWeekDaysList={setWeekDaysList}/>
                 </SemanasComponent>
 
                 <ButtonGeral>

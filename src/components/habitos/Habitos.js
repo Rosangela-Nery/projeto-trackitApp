@@ -14,6 +14,7 @@ export default function Habitos({token, fotoDeUsuario}) {
     const [tarefas, setTarefas] = useState([])
     const [remove, setRemove] = useState('');
     const [weekDays, setWeekDays] = useState([]);
+    const [weekDaysList, setWeekDaysList] = useState([])
 
     useEffect(() => {
 
@@ -55,7 +56,7 @@ export default function Habitos({token, fotoDeUsuario}) {
                     ) :(
                         tarefas.map((item, index) => {
                             return (
-                                <RegisteredHabits item={item} key={index} Registered={Registered} token={token} setRemove={setRemove} weekDays={weekDays} setWeekDays={setWeekDays}/>
+                                <RegisteredHabits item={item} key={index} Registered={Registered} token={token} setRemove={setRemove} weekDays={weekDays} setWeekDays={setWeekDays} weekDaysList={weekDaysList} setWeekDaysList={setWeekDaysList}/>
                             );
                         })
                     )}
@@ -70,7 +71,7 @@ export default function Habitos({token, fotoDeUsuario}) {
                         <h6>Meus hábitos</h6>
                     </TitleEButtonComponent>
 
-                    <CadastrarHabitos setClicado={setClicado} token={token} weekDays={weekDays} setWeekDays={setWeekDays}/>
+                    <CadastrarHabitos setClicado={setClicado} token={token} weekDays={weekDays} setWeekDays={setWeekDays} weekDaysList={weekDaysList} setWeekDaysList={setWeekDaysList}/>
 
                     {tarefas.length === 0 ? (
                         <DescriptionComponent>

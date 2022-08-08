@@ -21,6 +21,7 @@ const HistoricHabit = styled.div`
     background-color: #E5E5E5;
     padding-top: 80px;
     padding-left: 20px;
+    box-sizing: border-box;
 
     h1 {
         font-size: 23px;

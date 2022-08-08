@@ -1,20 +1,21 @@
 import { useEffect } from 'react';
 import styled from 'styled-components';
 
-export default function Week({value, setCatchWeek, weekDays, setWeekDays}) {
+export default function Week({value, setCatchWeek, weekDays, setWeekDays, setWeekDaysList}) {
 
     const newList = [
-        { id: 1, day: 'D', estado: 'descelecionado'},
-        { id: 2, day: 'S', estado: 'descelecionado'},
-        { id: 3, day: 'T', estado: 'descelecionado'},
+        { id: 0, day: 'D', estado: 'descelecionado'},
+        { id: 1, day: 'S', estado: 'descelecionado'},
+        { id: 2, day: 'T', estado: 'descelecionado'},
+        { id: 3, day: 'Q', estado: 'descelecionado'},
         { id: 4, day: 'Q', estado: 'descelecionado'},
-        { id: 5, day: 'Q', estado: 'descelecionado'},
-        { id: 6, day: 'S', estado: 'descelecionado'},
-        { id: 7, day: 'S', estado: 'descelecionado'}
+        { id: 5, day: 'S', estado: 'descelecionado'},
+        { id: 6, day: 'S', estado: 'descelecionado'}
     ];
 
     useEffect (() => {
         setWeekDays(newList)
+        setWeekDaysList(newList)
     }, []);
 
     function selectedDay(id) {
