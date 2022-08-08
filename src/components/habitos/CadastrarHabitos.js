@@ -1,17 +1,39 @@
 import { useState } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
+import Week from './Week';
+import { useNavigate } from 'react-router-dom';
 
-export default function CadastrarHabitos({setClicado}) {
-
+export default function CadastrarHabitos({setClicado, token, weekDays, setWeekDays}) {
     const [name, setName] = useState('');
+    const [catchWeek, setCatchWeek] = useState('');
+    const navigate = useNavigate();
 
     function handleForm(e) {
         e.preventDefault();
 
         const galleryOfHabits = {
-            name
+            name,
+            'days': catchWeek
         }
-        console.log(galleryOfHabits)
+
+        const config = {
+            headers: {
+                Authorization: 
+                    `Bearer ${token}`,
+            },
+        };
+
+        const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', galleryOfHabits, config);
+
+
+        promise.then((res) => {
+            console.log('resposta: ', res.data);
+            setClicado(false);
+        });
+        promise.catch(() => {
+            navigate('/habitos')
+        });
     }
 
     return (
@@ -24,20 +46,16 @@ export default function CadastrarHabitos({setClicado}) {
                     value={name}
                     required
                 />
+
                 <SemanasComponent>
-                    <p>D</p>
-                    <p>S</p>
-                    <p>T</p>
-                    <p>Q</p>
-                    <p>Q</p>
-                    <p>S</p>
-                    <p>S</p>
+                    <Week value={catchWeek} setCatchWeek={setCatchWeek} weekDays={weekDays} setWeekDays={setWeekDays}/>
                 </SemanasComponent>
+
                 <ButtonGeral>
                     <ButtonBrancoComponent onClick={() => {setClicado(false)}}>
                         Cancelar
                     </ButtonBrancoComponent>
-                    <ButtonAzulComponent>Salvar</ButtonAzulComponent>
+                    <ButtonAzulComponent type='submit'>Salvar</ButtonAzulComponent>
                 </ButtonGeral>
             </form>
         </CriarHabitosComponent>
@@ -61,20 +79,9 @@ const CriarHabitosComponent = styled.div`
 const SemanasComponent = styled.div`
     display: flex;
     flex-direction: row;
+    margin-top: 10px;
+    margin-bottom: 20px;
 
-    p {
-        width: 30px;
-        height: 30px;
-        border: 1px solid #D5D5D5;
-        border-radius: 5px;
-        color: #DBDBDB;
-        margin-right: 5px;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-    }
 `
 
 const InputComponent = styled.input`

@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-export default function Navbar() {
+export default function Navbar({fotoDeUsuario}) {
     return (
         <NavbarComponent>
             <p>Trackit</p>
-            <img src='../images/foto2.png' alt='Minha foto' width="51px" height="51px"/>
+            <img src={fotoDeUsuario.image} alt='Minha foto' width="51px" height="51px"/>
         </NavbarComponent>
     );
 }
@@ -30,5 +30,9 @@ const NavbarComponent = styled.div`
         font-family: 'Playball';
         font-size: 39px;
         color: white;
+    }
+
+    img {
+        border-radius: 50%;
     }
 `

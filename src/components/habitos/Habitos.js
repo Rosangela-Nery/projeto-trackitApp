@@ -1,12 +1,41 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import styled from 'styled-components';
 import Footer from '../Footer';
 import Navbar from '../Navbar'
 import CadastrarHabitos from './CadastrarHabitos';
+import RegisteredHabits from './RegisteredHabits';
 
-export default function Habitos() {
+export default function Habitos({token, fotoDeUsuario}) {
 
+    const navigate = useNavigate();
     const [clicado, setClicado] = useState(false);
+    const [tarefas, setTarefas] = useState([])
+    const [remove, setRemove] = useState('');
+    const [weekDays, setWeekDays] = useState([]);
+
+    useEffect(() => {
+
+        const config = {
+            headers: {
+                Authorization: 
+                    `Bearer ${token}`,
+            },
+        };
+
+        const promise = axios.get(
+            'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', 
+            config
+        );
+
+        promise.then((res) => {
+            setTarefas(res.data)
+        });
+        promise.catch((err) => {
+            navigate('/');
+        })
+    }, [clicado, remove]);
 
     function paginaInicialDeCriacao() {
 
@@ -19,9 +48,17 @@ export default function Habitos() {
                         setClicado(true);
                         }}>+</h5>
                     </TitleEButtonComponent>
-                    <DescriptionComponent>
-                        Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
-                    </DescriptionComponent>
+                    {tarefas.length === 0 ? (
+                        <DescriptionComponent>
+                            Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
+                        </DescriptionComponent>
+                    ) :(
+                        tarefas.map((item, index) => {
+                            return (
+                                <RegisteredHabits item={item} key={index} Registered={Registered} token={token} setRemove={setRemove} weekDays={weekDays} setWeekDays={setWeekDays}/>
+                            );
+                        })
+                    )}
                 </>
             );
         }
@@ -33,11 +70,19 @@ export default function Habitos() {
                         <h6>Meus hábitos</h6>
                     </TitleEButtonComponent>
 
-                    <CadastrarHabitos setClicado={setClicado}/>
+                    <CadastrarHabitos setClicado={setClicado} token={token} weekDays={weekDays} setWeekDays={setWeekDays}/>
 
-                    <DescriptionComponent>
-                        Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
-                    </DescriptionComponent>
+                    {tarefas.length === 0 ? (
+                        <DescriptionComponent>
+                            Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
+                        </DescriptionComponent>
+                    ) :(
+                        tarefas.map((item, index) => {
+                            return (
+                                <RegisteredHabits item={item} key={index} Registered={Registered} token={token} setRemove={setRemove} weekDays={weekDays} setWeekDays={setWeekDays}/>
+                            );
+                        })
+                    )}
                 </>
             );
         }
@@ -45,7 +90,7 @@ export default function Habitos() {
 
     return(
         <HabitosComponent>
-            <Navbar />
+            <Navbar fotoDeUsuario={fotoDeUsuario}/>
                 {paginaInicialDeCriacao()}
             <Footer/>
         </HabitosComponent>
@@ -54,7 +99,9 @@ export default function Habitos() {
 
 const HabitosComponent = styled.div`
     width: 414px;
-    height: 900px;
+    height: 760px;
+    padding-bottom: 100px;
+    margin-bottom: 50px;
     background-color: #E5E5E5;
 `
 
@@ -95,4 +142,14 @@ const DescriptionComponent = styled.p`
     line-height: 23px;
     color: #666666;
     margin: 0 25px;
+`
+
+const Registered = styled.div`
+    width: 340px;
+    height: 91px;
+    background-color: white;
+    margin-left: 30px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    padding-left: 10px;
 `

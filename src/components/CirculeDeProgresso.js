@@ -15,6 +15,7 @@ export default function CirculeDeProgresso() {
                 pathColor: 'white',
                 trailColor: 'transparent',
                 textSize: '18px',
+                strokeLinecap: "round",
             })}
             >
                 <h1 style={{

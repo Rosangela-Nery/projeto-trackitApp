@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import CadastrarConta from "./CadastrarConta";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
-export default function Login() {
-    const navigate = useNavigate();
+export default function Login({setToken, setFotoDeUsuario}) {
 
+    const navegate = useNavigate();
     const [clicado, setClicado] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -18,12 +18,17 @@ export default function Login() {
             password,
         };
 
-        const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit', dados);
+        const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', dados);
 
         promise.then((res) => {
-            console.log("wer: ", res.auth);
+            console.log("login: ", res.data);
+            setFotoDeUsuario(res.data)
+            setToken(res.data.token);
             restForm();
-            navigate('/');
+            navegate('/habitos');
+        });
+        promise.catch((err) => {
+            alert('Não foi possível entrar, verifique seus dados!')
         })
     }
 
@@ -43,7 +48,7 @@ export default function Login() {
                         id="formEmail" 
                         placeholder="email"
                         type="email" 
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(e) => {setEmail(e.target.value)}}
                         value={email}
                         required
                     />
@@ -51,7 +56,7 @@ export default function Login() {
                         id="forSenha" 
                         placeholder="senha"
                         type="password"
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => {setPassword(e.target.value)}}
                         value={password}
                         required
                     />

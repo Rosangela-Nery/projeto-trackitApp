@@ -1,15 +1,20 @@
 import CirculeDeProgresso from './CirculeDeProgresso';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
     return (
         <FooterComponent>
             <div>
-                <p>Hábitos</p>
+                <Link to={'/habitos'}>
+                    <p>Hábitos</p>
+                </Link>
             </div>
             <CirculeDeProgresso />
             <div>
-                <p>Histórico</p>
+                <Link to={'/historico'}>
+                    <p>Histórico</p>
+                </Link>
             </div>
         </FooterComponent>
     );
@@ -33,4 +38,9 @@ const FooterComponent = styled.div`
     bottom: 0;
     left: 0;
     z-index: 1;
+
+    a {
+        text-decoration: none;
+        color: #52B6FF;
+    }
 `
